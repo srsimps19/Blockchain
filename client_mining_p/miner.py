@@ -14,14 +14,14 @@ def proof_of_work(block):
     in an effort to find a number that is a valid proof
     :return: A valid proof for the provided block
     """
-    print("Starting mining!")
+    print("Started mining!")
     block_string = json.dumps(block, sort_keys=True)
     proof = 0
 
     while valid_proof(block_string, proof) is False:
         proof += 1
     
-    print("Done mining!")
+    print(f"Done mining! \n Proof: {proof}")
 
     return proof
 
@@ -83,6 +83,9 @@ if __name__ == '__main__':
 
         if data["message"] == "New Block Forged":
             coins += 1
-            print(f"You have mined {coins} coins!")
+            if coins == 1:
+                print(f"You have mined {coins} coin!")
+            else:
+                print(f"You have mined {coins} coins!")
         else:
             print(data["message"])
